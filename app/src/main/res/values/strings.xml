@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WeatherNote</string>
+    <string name="login">Login</string>
+    <string name="notes_title">Notes</string>
+    <string name="new_note">New Note</string>
+    <string name="note_title_label">Note</string>
+    <string name="note_title_hint">Enter a title for the note.</string>
+    <string name="note_details_label">Details</string>
+    <string name="note_type_hint">Reschedule/Delay/Closing</string>
+    <string name="date_picker_title">Date of note:</string>
+    <string name="email_hint">ENTER EMAIL ADDRESS</string>
+</resources>
