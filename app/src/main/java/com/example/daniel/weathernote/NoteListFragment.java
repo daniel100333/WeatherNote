@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,8 @@ import java.util.List;
  * Created by Daniel on 3/3/2016.
  */
 public class NoteListFragment extends Fragment {
+
+    private static final String TAG = NoteListFragment.class.getName();
 
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mAdapter;
@@ -76,6 +79,7 @@ public class NoteListFragment extends Fragment {
     private void updateUI() {
         NoteLab noteLab = NoteLab.get(getActivity());
         List<Note> notes = noteLab.getNotes();
+        Log.d(TAG, notes.toString());
 
         if (mAdapter == null) {
             mAdapter = new NoteAdapter(notes);

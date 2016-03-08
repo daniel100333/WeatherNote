@@ -1,5 +1,6 @@
 package com.example.daniel.weathernote;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -56,7 +57,8 @@ public class LoginFragment extends Fragment {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), NoteListActivity.class);
+                startActivity(intent);
             }
         });
 
