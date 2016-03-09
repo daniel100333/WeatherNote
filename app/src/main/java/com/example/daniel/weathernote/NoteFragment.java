@@ -7,11 +7,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.Date;
 import java.util.UUID;
@@ -21,6 +25,8 @@ import java.util.UUID;
  */
 public class NoteFragment extends Fragment {
 
+    private static final String TAG = NoteFragment.class.toString();
+
     private static final String ARG_NOTE_ID = "note_id";
     private static final String DIALOG_DATE = "DialogDate";
 
@@ -29,7 +35,7 @@ public class NoteFragment extends Fragment {
     private Note mNote;
     private EditText mTitleField;
     private Button mDateButton;
-    private EditText mTypeField;
+    private Spinner mTypeSpinner;
 
 
     public static NoteFragment newInstance(UUID noteId) {
@@ -93,24 +99,14 @@ public class NoteFragment extends Fragment {
             }
         });
 
-        mTypeField = (EditText) v.findViewById(R.id.note_type);
-        mTypeField.setText(mNote.getTitle());
-        mTypeField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mNote.setType(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        mTypeSpinner = (Spinner) v.findViewById(R.id.note_type);
+        Log.d(TAG, Integer.toString(mNote.getType()));
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.note_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mTypeSpinner.setAdapter(adapter);
+        mTypeSpinner.setOnItemSelectedListener(new TypeSpinnerSelectedListener());
+        mTypeSpinner.setSelection(mNote.getType());
 
         return v;
     }
@@ -126,6 +122,20 @@ public class NoteFragment extends Fragment {
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mNote.setDate(date);
             updateDate();
+        }
+    }
+
+    private class TypeSpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            int noteType = position;
+            Log.d("Note Type", Integer.toString(noteType));
+            mNote.setType(noteType);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
         }
     }
 

@@ -9,4 +9,9 @@
     <string name="note_type_hint">Reschedule/Delay/Closing</string>
     <string name="date_picker_title">Date of note:</string>
     <string name="email_hint">ENTER EMAIL ADDRESS</string>
+    <string-array name="note_types">
+        <item>Reschedule</item>
+        <item>Delay</item>
+        <item>Cancel</item>
+    </string-array>
 </resources>

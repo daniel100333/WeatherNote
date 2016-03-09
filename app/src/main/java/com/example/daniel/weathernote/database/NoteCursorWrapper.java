@@ -21,7 +21,7 @@ public class NoteCursorWrapper extends CursorWrapper {
         String uuidString = getString(getColumnIndex(NoteTable.Cols.UUID));
         String title = getString(getColumnIndex(NoteTable.Cols.TITLE));
         long date = getLong(getColumnIndex(NoteTable.Cols.DATE));
-        String type = getString(getColumnIndex(NoteTable.Cols.TYPE));
+        int type = getInt(getColumnIndex(NoteTable.Cols.TYPE));
 
         Note note = new Note(UUID.fromString(uuidString));
         note.setTitle(title);

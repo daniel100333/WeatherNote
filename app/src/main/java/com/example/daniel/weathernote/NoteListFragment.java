@@ -2,6 +2,7 @@ package com.example.daniel.weathernote;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,12 +27,12 @@ public class NoteListFragment extends Fragment {
     private static final String TAG = NoteListFragment.class.getName();
 
     private RecyclerView mNoteRecyclerView;
+    private FloatingActionButton mAddNoteFloatingActionButton;
     private NoteAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -42,6 +43,19 @@ public class NoteListFragment extends Fragment {
         mNoteRecyclerView = (RecyclerView) view
                 .findViewById(R.id.note_recycler_view);
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mAddNoteFloatingActionButton = (FloatingActionButton) view
+                .findViewById(R.id.add_note_fab);
+        mAddNoteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Note note = new Note();
+                NoteLab.get(getActivity()).addNote(note);
+                Intent intent = NotePagerActivity
+                        .newIntent(getActivity(), note.getId());
+                startActivity(intent);
+            }
+        });
 
         updateUI();
 
@@ -54,27 +68,6 @@ public class NoteListFragment extends Fragment {
         updateUI();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_note_list, menu);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_new_crime:
-                Note note = new Note();
-                NoteLab.get(getActivity()).addNote(note);
-                Intent intent = NotePagerActivity
-                        .newIntent(getActivity(), note.getId());
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     private void updateUI() {
         NoteLab noteLab = NoteLab.get(getActivity());

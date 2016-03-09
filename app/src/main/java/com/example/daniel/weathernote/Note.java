@@ -11,7 +11,7 @@ public class Note {
     private UUID mId;
     private String mTitle;
     private Date mDate;
-    private String mType;
+    private int mTypePosition;
 
     public Note() {
         this(UUID.randomUUID());
@@ -42,11 +42,11 @@ public class Note {
         mDate = date;
     }
 
-    public String getType() {
-        return mType;
+    public int getType() {
+        return mTypePosition;
     }
 
-    public void setType(String type) {
-        mType = type;
+    public void setType(int type) {
+        mTypePosition = type;
     }
 }
