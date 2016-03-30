@@ -1,9 +1,10 @@
 package com.example.daniel.weathernote;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,11 +28,14 @@ public class NoteListFragment extends Fragment {
 
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mAdapter;
+    private List<Note> mNotes = new ArrayList<>();
+    private FetchNotesTask mFetchNotes;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        new FetchNotesTask().execute(getActivity());
     }
 
     @Override
@@ -42,6 +46,7 @@ public class NoteListFragment extends Fragment {
         mNoteRecyclerView = (RecyclerView) view
                 .findViewById(R.id.note_recycler_view);
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mNoteRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         updateUI();
 
@@ -52,6 +57,12 @@ public class NoteListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         updateUI();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
     }
 
     @Override
@@ -77,15 +88,11 @@ public class NoteListFragment extends Fragment {
     }
 
     private void updateUI() {
-        NoteLab noteLab = NoteLab.get(getActivity());
-        List<Note> notes = noteLab.getNotes();
-        Log.d(TAG, notes.toString());
-
-        if (mAdapter == null) {
-            mAdapter = new NoteAdapter(notes);
+        if (mAdapter == null && isAdded()) {
+            mAdapter = new NoteAdapter(mNotes);
             mNoteRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.setNotes(notes);
+            mAdapter.setNotes(mNotes);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -95,6 +102,9 @@ public class NoteListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
+
+        //colormap in here
+        //getActivity().getResources
 
         private Note mNote;
 
@@ -109,6 +119,8 @@ public class NoteListFragment extends Fragment {
         public void bindNote(Note note) {
             mNote = note;
             mTitleTextView.setText(mNote.getTitle());
+            //int valuefrommap
+            //mTitleTextView.setTextColor(getContext().getResources().getColor());
             mDateTextView.setText(mNote.getDate().toString());
         }
 
@@ -120,10 +132,10 @@ public class NoteListFragment extends Fragment {
     }
 
     private class NoteAdapter extends RecyclerView.Adapter<NoteHolder> {
-        private List<Note> mNotes;
+        private List<Note> mNoteListItems;
 
         public NoteAdapter(List<Note> notes) {
-            mNotes = notes;
+            mNoteListItems = notes;
         }
 
         @Override
@@ -135,17 +147,33 @@ public class NoteListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(NoteHolder holder, int position) {
-            Note note = mNotes.get(position);
+            Note note = mNoteListItems.get(position);
             holder.bindNote(note);
         }
 
         @Override
         public int getItemCount() {
-            return mNotes.size();
+            return mNoteListItems.size();
         }
 
         public void setNotes(List<Note> notes) {
+            mNoteListItems = notes;
+        }
+    }
+
+    private class FetchNotesTask extends AsyncTask<Context,Void,List<Note>> {
+
+
+        @Override
+        protected List<Note> doInBackground(Context... params) {
+            Log.i(TAG, "Fetching notes");
+            return new NoteFetcher().fetchNotes(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Note> notes) {
             mNotes = notes;
+            updateUI();
         }
     }
 
