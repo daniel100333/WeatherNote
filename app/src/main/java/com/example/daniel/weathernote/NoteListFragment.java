@@ -126,12 +126,6 @@ public class NoteListFragment extends Fragment {
         }
     }
 
-    private String formatDateAndTime(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy | hh:mm a");
-        String formattedDate = sdf.format(date);
-        return formattedDate;
-    }
-
     private class NoteAdapter extends RecyclerView.Adapter<NoteHolder> {
         private List<Note> mNoteListItems;
 
@@ -176,6 +170,12 @@ public class NoteListFragment extends Fragment {
             mNotes = notes;
             updateUI();
         }
+    }
+
+    private String formatDateAndTime(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy | hh:mm a");
+        String formattedDate = sdf.format(date);
+        return formattedDate;
     }
 
 }

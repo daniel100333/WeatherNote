@@ -163,7 +163,6 @@ public class NoteFragment extends Fragment {
             case R.id.menu_item_add_note:
 
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -196,7 +195,6 @@ public class NoteFragment extends Fragment {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             int noteType = position;
-            Log.d("Note Type", Integer.toString(noteType));
             mNote.setType(noteType);
         }
 
