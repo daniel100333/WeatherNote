@@ -37,7 +37,8 @@ public class NoteListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        new FetchNotesTask().execute(getActivity());
+        mFetchNotes = new FetchNotesTask();
+        mFetchNotes.execute(getActivity());
     }
 
     @Override
@@ -77,7 +78,7 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-
+        mFetchNotes.cancel(true);
     }
 
     @Override

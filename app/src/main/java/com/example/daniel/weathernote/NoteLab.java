@@ -88,6 +88,7 @@ public class NoteLab {
         ContentValues values = new ContentValues();
         values.put(NoteTable.Cols.UUID, note.getId().toString());
         values.put(NoteTable.Cols.TITLE, note.getTitle());
+        values.put(NoteTable.Cols.DESCRIPTION, note.getDescription());
         values.put(NoteTable.Cols.DATE, note.getDate().getTime());
         values.put(NoteTable.Cols.TYPE, note.getType());
 

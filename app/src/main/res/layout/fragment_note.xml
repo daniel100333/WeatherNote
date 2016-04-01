@@ -5,46 +5,95 @@
               android:layout_height="match_parent"
               android:background="@color/background">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/note_title_label"
-        style="?android:listSeparatorTextViewStyle"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimary"/>
 
     <EditText android:id="@+id/note_title"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="@string/note_title_hint"
-        />
+              android:textColorHint="@color/email_field"
+              android:textColor="@color/email_field"
+              android:textStyle="bold"
+              android:textSize="18sp"
+              android:inputType="textCapSentences"
+              android:background="@android:color/transparent"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              android:paddingTop="16dp"
+              android:paddingBottom="8dp"/>
 
-    <TextView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="16dp"
+        android:background="@color/note_separator_bar">
+
+    </View>
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/note_description"/>
+        android:id="@+id/note_description"
+        android:gravity="top|left"
+        android:hint="@string/note_description_hint"
+        android:background="@android:color/transparent"
+        android:textColorHint="@color/email_field"
+        android:textColor="@color/email_field"
+        android:inputType="textCapSentences"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"/>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/note_details_label"
-        style="?android:listSeparatorTextViewStyle"/>
+        android:background="@color/email_field"
+        android:paddingBottom="16dp"
+        android:layout_weight="1">
 
-    <Button
-        android:id="@+id/note_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/details_textview"
+            android:text="@string/note_details_label"
+            android:layout_marginLeft="16dp"
+            style="?android:listSeparatorTextViewStyle"/>
 
-    <Spinner android:id="@+id/note_type"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:background="@color/reschedule_bar"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/details_relative_layout"
+            android:layout_below="@id/details_textview"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <Button
+                android:id="@+id/note_date"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
+            <Button
+                android:id="@+id/note_time"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+
+
+        <Spinner android:id="@+id/note_type"
+                 android:layout_width="220dp"
+                 android:layout_height="wrap_content"
+                 android:background="@color/reschedule_bar"
+                 android:layout_alignParentRight="true"
+                 android:layout_below="@id/details_relative_layout"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

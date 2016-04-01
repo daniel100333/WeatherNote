@@ -24,6 +24,7 @@ public class NoteBaseHelper extends SQLiteOpenHelper {
                         " _id integer primary key autoincrement, " +
                         NoteTable.Cols.UUID + ", " +
                         NoteTable.Cols.TITLE + ", " +
+                        NoteTable.Cols.DESCRIPTION + ", " +
                         NoteTable.Cols.DATE + ", " +
                         NoteTable.Cols.TYPE +
                         ")"

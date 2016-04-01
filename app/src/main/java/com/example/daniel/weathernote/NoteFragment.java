@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -29,12 +30,16 @@ public class NoteFragment extends Fragment {
 
     private static final String ARG_NOTE_ID = "note_id";
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_TIME = "DialogTime";
 
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_TIME = 1;
 
     private Note mNote;
     private EditText mTitleField;
+    private EditText mDescriptionField;
     private Button mDateButton;
+    private Button mTimeButton;
     private Spinner mTypeSpinner;
 
 
@@ -86,6 +91,25 @@ public class NoteFragment extends Fragment {
             }
         });
 
+        mDescriptionField = (EditText) v.findViewById(R.id.note_description);
+        mDescriptionField.setText(mNote.getDescription());
+        mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mNote.setDescription(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         mDateButton = (Button) v.findViewById(R.id.note_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +123,23 @@ public class NoteFragment extends Fragment {
             }
         });
 
+        mTimeButton = (Button) v.findViewById(R.id.note_time);
+        updateTime();
+        mTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                TimePickerFragment dialog = TimePickerFragment
+                        .newInstance(mNote.getDate());
+                dialog.setTargetFragment(NoteFragment.this, REQUEST_TIME);
+                dialog.show(manager, DIALOG_TIME);
+            }
+        });
+
         mTypeSpinner = (Spinner) v.findViewById(R.id.note_type);
         Log.d(TAG, Integer.toString(mNote.getType()));
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.note_types, android.R.layout.simple_spinner_item);
+                R.array.note_types, R.layout.spinner_item_note);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mTypeSpinner.setAdapter(adapter);
         mTypeSpinner.setOnItemSelectedListener(new TypeSpinnerSelectedListener());
@@ -122,6 +159,15 @@ public class NoteFragment extends Fragment {
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mNote.setDate(date);
             updateDate();
+            updateTime();
+        }
+
+        if (requestCode == REQUEST_TIME) {
+            Date date = (Date) data
+                    .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            mNote.setDate(date);
+            updateDate();
+            updateTime();
         }
     }
 
@@ -139,7 +185,23 @@ public class NoteFragment extends Fragment {
         }
     }
 
+    private String formatMonth(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM dd, yyyy");
+        String formattedDate = sdf.format(date);
+        return formattedDate;
+    }
+
+    private String formatTime(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+        String formattedDate = sdf.format(date);
+        return formattedDate;
+    }
+
     private void updateDate() {
-        mDateButton.setText(mNote.getDate().toString());
+        mDateButton.setText(formatMonth(mNote.getDate()));
+    }
+
+    private void updateTime() {
+        mTimeButton.setText(formatTime(mNote.getDate()));
     }
 }

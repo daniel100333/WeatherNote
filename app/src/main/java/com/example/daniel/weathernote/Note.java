@@ -10,6 +10,7 @@ public class Note {
 
     private UUID mId;
     private String mTitle;
+    private String mDescription;
     private Date mDate;
     private int mTypePosition;
 
@@ -30,8 +31,16 @@ public class Note {
         return mTitle;
     }
 
+    public String getDescription() {
+        return mDescription;
+    }
+
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
     }
 
     public Date getDate() {
