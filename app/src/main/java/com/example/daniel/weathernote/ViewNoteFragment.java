@@ -77,7 +77,7 @@ public class ViewNoteFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 NoteFragment editnote = NoteFragment.newInstance(mNote.getId());
-                
+
             }
         });
 
