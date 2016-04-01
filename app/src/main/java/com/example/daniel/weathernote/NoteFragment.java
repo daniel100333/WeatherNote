@@ -9,6 +9,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -55,6 +58,7 @@ public class NoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         UUID noteId = (UUID) getArguments().getSerializable(ARG_NOTE_ID);
         mNote = NoteLab.get(getActivity()).getNote(noteId);
     }
@@ -93,7 +97,7 @@ public class NoteFragment extends Fragment {
 
         mDescriptionField = (EditText) v.findViewById(R.id.note_description);
         mDescriptionField.setText(mNote.getDescription());
-        mTitleField.addTextChangedListener(new TextWatcher() {
+        mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -146,6 +150,23 @@ public class NoteFragment extends Fragment {
         mTypeSpinner.setSelection(mNote.getType());
 
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_note, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_add_note:
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

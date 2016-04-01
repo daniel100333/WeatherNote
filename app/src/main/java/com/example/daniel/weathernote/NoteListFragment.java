@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +38,6 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         mFetchNotes = new FetchNotesTask();
         mFetchNotes.execute(getActivity());
     }
@@ -81,28 +82,6 @@ public class NoteListFragment extends Fragment {
         mFetchNotes.cancel(true);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_note_list, menu);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_new_crime:
-                Note note = new Note();
-                NoteLab.get(getActivity()).addNote(note);
-                Intent intent = NotePagerActivity
-                        .newIntent(getActivity(), note.getId());
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void updateUI() {
         if (mAdapter == null && isAdded()) {
             mAdapter = new NoteAdapter(mNotes);
@@ -137,7 +116,7 @@ public class NoteListFragment extends Fragment {
             mTitleTextView.setText(mNote.getTitle());
             //int valuefrommap
             //mTitleTextView.setTextColor(getContext().getResources().getColor());
-            mDateTextView.setText(mNote.getDate().toString());
+            mDateTextView.setText(formatDateAndTime(mNote.getDate()));
         }
 
         @Override
@@ -145,6 +124,12 @@ public class NoteListFragment extends Fragment {
             Intent intent = NotePagerActivity.newIntent(getActivity(), mNote.getId());
             startActivity(intent);
         }
+    }
+
+    private String formatDateAndTime(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy | hh:mm a");
+        String formattedDate = sdf.format(date);
+        return formattedDate;
     }
 
     private class NoteAdapter extends RecyclerView.Adapter<NoteHolder> {

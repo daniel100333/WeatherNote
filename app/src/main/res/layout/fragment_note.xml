@@ -47,7 +47,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/email_field"
-        android:paddingBottom="16dp"
         android:layout_weight="1">
 
         <TextView
@@ -93,6 +92,7 @@
                  android:background="@color/reschedule_bar"
                  android:layout_alignParentRight="true"
                  android:layout_below="@id/details_relative_layout"/>
+
 
     </RelativeLayout>
 

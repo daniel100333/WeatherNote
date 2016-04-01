@@ -10,6 +10,7 @@
     <string name="date_picker_title">Date of note:</string>
     <string name="email_hint">ENTER EMAIL ADDRESS</string>
     <string name="note_description_hint">Note</string>
+    <string name="delete_note_button">DELETE THIS NOTE</string>
     <string-array name="note_types">
         <item>RESCHEDULE</item>
         <item>DELAY</item>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#F50057</color>
     <color name="background">#424242</color>
     <color name="email_field">#EEEEEE</color>
@@ -11,4 +11,5 @@
     <color name="cancel_bar">#B71C1C</color>
     <color name="bottom_bar">#FAFAFA</color>
     <color name="note_separator_bar">#616161</color>
+    <color name="delete_button">#E53935</color>
 </resources>
