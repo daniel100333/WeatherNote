@@ -2,7 +2,12 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="background">#333333</color>
-    <color name="email_field">#ededed</color>
+    <color name="colorAccent">#F50057</color>
+    <color name="background">#424242</color>
+    <color name="email_field">#F5F5F5</color>
+    <color name="button">#616161</color>
+    <color name="delay_bar">#EC407A</color>
+    <color name="reschedule_bar">#880E4F</color>
+    <color name="cancel_bar">#B71C1C</color>
+    <color name="bottom_bar">#FAFAFA</color>
 </resources>

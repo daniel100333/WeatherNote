@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/email_field"
                 xmlns:tools="http://schemas.android.com/tools">
+
+
+    <View
+        android:id="@+id/list_item_sidebar"
+        android:layout_width="15dp"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/list_item_note_title_text_view"
+        android:layout_alignBottom="@+id/list_item_note_date_text_view"
+        android:background="@color/delay_bar"/>
 
     <TextView
         android:id="@+id/list_item_note_title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/list_item_sidebar"
         android:textStyle="bold"
+        android:textColor="@color/reschedule_bar"
         tools:text="Note Title"
-        android:padding="4dp"/>
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="4dp"/>
 
     <TextView
         android:id="@+id/list_item_note_date_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/list_item_note_title_text_view"
+        android:layout_toRightOf="@id/list_item_sidebar"
+        android:textColor="@color/background"
         tools:text="Note Date"
-        android:padding="4dp"/>
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="16dp"/>
+
 
 </RelativeLayout>
