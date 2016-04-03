@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#F50057</color>
-    <color name="background">#424242</color>
-    <color name="email_field">#EEEEEE</color>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#37474F</color>
+    <color name="colorAccent">#00C853</color>
+
+
+    <color name="background">#607D8B</color>
+    <color name="light_text">#EEEEEE</color>
+    <color name="error_text">#FF5252</color>
+
     <color name="button">#616161</color>
     <color name="delay_bar">#EC407A</color>
     <color name="reschedule_bar">#880E4F</color>
@@ -12,4 +16,5 @@
     <color name="bottom_bar">#FAFAFA</color>
     <color name="note_separator_bar">#616161</color>
     <color name="delete_button">#E53935</color>
+    <color name="noteSecondary">#9E9E9E</color>
 </resources>

@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/background">
+              android:layout_height="match_parent">
 
 
     <EditText android:id="@+id/note_title"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="@string/note_title_hint"
-              android:textColorHint="@color/email_field"
-              android:textColor="@color/email_field"
+              android:textColorHint="@color/light_text"
+              android:textColor="@color/light_text"
               android:textStyle="bold"
               android:textSize="18sp"
               android:inputType="textCapSentences"
@@ -36,8 +35,8 @@
         android:gravity="top|left"
         android:hint="@string/note_description_hint"
         android:background="@android:color/transparent"
-        android:textColorHint="@color/email_field"
-        android:textColor="@color/email_field"
+        android:textColorHint="@color/light_text"
+        android:textColor="@color/light_text"
         android:inputType="textCapSentences"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
@@ -46,7 +45,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/email_field"
+        android:background="@color/light_text"
         android:layout_weight="1">
 
         <TextView
