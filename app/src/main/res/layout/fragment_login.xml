@@ -16,9 +16,15 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@drawable/logo"
+        <ImageView android:src="@drawable/logotext"
                    android:layout_width="wrap_content"
                    android:layout_height="72dp"
+                   android:layout_marginBottom="12dp"
+                   android:layout_gravity="center_horizontal" />
+
+        <ImageView android:src="@drawable/cloudlogo"
+                   android:layout_width="wrap_content"
+                   android:layout_height="50dp"
                    android:layout_marginBottom="24dp"
                    android:layout_gravity="center_horizontal" />
 
