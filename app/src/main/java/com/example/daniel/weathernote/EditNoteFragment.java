@@ -27,9 +27,9 @@ import java.util.UUID;
 /**
  * Created by Daniel on 3/4/2016.
  */
-public class NoteFragment extends Fragment {
+public class EditNoteFragment extends Fragment {
 
-    private static final String TAG = NoteFragment.class.toString();
+    private static final String TAG = EditNoteFragment.class.toString();
 
     private static final String ARG_NOTE_ID = "note_id";
     private static final String DIALOG_DATE = "DialogDate";
@@ -46,11 +46,11 @@ public class NoteFragment extends Fragment {
     private Spinner mTypeSpinner;
 
 
-    public static NoteFragment newInstance(UUID noteId) {
+    public static EditNoteFragment newInstance(UUID noteId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_NOTE_ID, noteId);
 
-        NoteFragment fragment = new NoteFragment();
+        EditNoteFragment fragment = new EditNoteFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -122,7 +122,7 @@ public class NoteFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment
                         .newInstance(mNote.getDate());
-                dialog.setTargetFragment(NoteFragment.this, REQUEST_DATE);
+                dialog.setTargetFragment(EditNoteFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
@@ -135,7 +135,7 @@ public class NoteFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 TimePickerFragment dialog = TimePickerFragment
                         .newInstance(mNote.getDate());
-                dialog.setTargetFragment(NoteFragment.this, REQUEST_TIME);
+                dialog.setTargetFragment(EditNoteFragment.this, REQUEST_TIME);
                 dialog.show(manager, DIALOG_TIME);
             }
         });
@@ -161,7 +161,8 @@ public class NoteFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_add_note:
-
+                Intent intent = new Intent(getActivity(), NoteListActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

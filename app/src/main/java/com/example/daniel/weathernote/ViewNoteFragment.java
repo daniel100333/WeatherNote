@@ -1,6 +1,5 @@
 package com.example.daniel.weathernote;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -76,7 +74,7 @@ public class ViewNoteFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
-                NoteFragment editnote = NoteFragment.newInstance(mNote.getId());
+                EditNoteFragment editnote = EditNoteFragment.newInstance(mNote.getId());
                 
             }
         });

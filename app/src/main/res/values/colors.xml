@@ -10,9 +10,9 @@
     <color name="error_text">#FF5252</color>
 
     <color name="button">#616161</color>
-    <color name="delay_bar">#EC407A</color>
-    <color name="reschedule_bar">#880E4F</color>
-    <color name="cancel_bar">#B71C1C</color>
+    <color name="delay_bar">#4CAF50</color>
+    <color name="reschedule_bar">#388E3C</color>
+    <color name="cancel_bar">#1B5E20</color>
     <color name="bottom_bar">#FAFAFA</color>
     <color name="note_separator_bar">#616161</color>
     <color name="delete_button">#E53935</color>

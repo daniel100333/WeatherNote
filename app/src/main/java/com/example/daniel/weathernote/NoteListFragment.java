@@ -10,9 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -59,8 +56,7 @@ public class NoteListFragment extends Fragment {
             public void onClick(View v) {
                 Note note = new Note();
                 NoteLab.get(getActivity()).addNote(note);
-                Intent intent = NotePagerActivity
-                        .newIntent(getActivity(), note.getId());
+                Intent intent = EditNoteActivity.newIntent(getActivity(), note.getId());
                 startActivity(intent);
             }
         });
