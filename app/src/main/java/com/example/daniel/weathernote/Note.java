@@ -1,12 +1,13 @@
 package com.example.daniel.weathernote;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by Daniel on 3/3/2016.
  */
-public class Note {
+public class Note implements Serializable{
 
     private UUID mId;
     private String mTitle;

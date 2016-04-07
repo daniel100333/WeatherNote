@@ -29,6 +29,8 @@ import java.util.UUID;
  */
 public class EditNoteFragment extends Fragment {
 
+    public static final String EXTRA_NOTE = "com.example.daniel.weathernote.note";
+
     private static final String TAG = EditNoteFragment.class.toString();
 
     private static final String ARG_NOTE_ID = "note_id";
@@ -60,16 +62,13 @@ public class EditNoteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         UUID noteId = (UUID) getArguments().getSerializable(ARG_NOTE_ID);
-        mNote = NoteLab.get(getActivity()).getNote(noteId);
+        if (NoteLab.get(getActivity()).getNote(noteId) != null) {
+            mNote = NoteLab.get(getActivity()).getNote(noteId);
+        } else {
+            mNote = new Note(noteId);
+        }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        NoteLab.get(getActivity())
-                .updateNote(mNote);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -161,8 +160,15 @@ public class EditNoteFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_add_note:
-                Intent intent = new Intent(getActivity(), NoteListActivity.class);
-                startActivity(intent);
+                Intent noteCreatedIntent = new Intent();
+                noteCreatedIntent.putExtra(EXTRA_NOTE, mNote);
+                getActivity().setResult(Activity.RESULT_OK, noteCreatedIntent);
+                getActivity().finish();
+                return true;
+            case android.R.id.home:
+                Intent noteCancelledIntent = new Intent();
+                getActivity().setResult(Activity.RESULT_CANCELED, noteCancelledIntent);
+                getActivity().finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

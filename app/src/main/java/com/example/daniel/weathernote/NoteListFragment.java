@@ -1,5 +1,6 @@
 package com.example.daniel.weathernote;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -25,6 +26,9 @@ import java.util.List;
 public class NoteListFragment extends Fragment {
 
     private static final String TAG = NoteListFragment.class.getName();
+
+    private static final int NEW_NOTE_CREATED = 0;
+    private static final int EDIT_NOTE = 1;
 
     private RecyclerView mNoteRecyclerView;
     private FloatingActionButton mAddNoteFloatingActionButton;
@@ -55,9 +59,8 @@ public class NoteListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Note note = new Note();
-                NoteLab.get(getActivity()).addNote(note);
                 Intent intent = EditNoteActivity.newIntent(getActivity(), note.getId());
-                startActivity(intent);
+                startActivityForResult(intent, NEW_NOTE_CREATED);
             }
         });
 
@@ -79,12 +82,35 @@ public class NoteListFragment extends Fragment {
     }
 
     private void updateUI() {
+        Log.i(TAG, "Updating UI");
         if (mAdapter == null && isAdded()) {
+            Log.i(TAG, "Condition1");
             mAdapter = new NoteAdapter(mNotes);
             mNoteRecyclerView.setAdapter(mAdapter);
         } else {
+            Log.i(TAG, "Condition2");
             mAdapter.setNotes(mNotes);
             mAdapter.notifyDataSetChanged();
+            Log.i(TAG, String.valueOf(mNotes.size()));
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == NEW_NOTE_CREATED) {
+            Note note = (Note) data.getSerializableExtra(EditNoteFragment.EXTRA_NOTE);
+            NoteLab.get(getActivity()).addNote(note);
+            mFetchNotes= new FetchNotesTask();
+            mFetchNotes.execute(getActivity());
+            updateUI();
+        }
+
+        if (requestCode == EDIT_NOTE) {
+            updateUI();
         }
     }
 
@@ -173,5 +199,7 @@ public class NoteListFragment extends Fragment {
         String formattedDate = sdf.format(date);
         return formattedDate;
     }
+
+
 
 }
